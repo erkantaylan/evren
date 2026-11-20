@@ -36,7 +36,7 @@ JSON := python3 -m json.tool --no-ensure-ascii
         quota models terms test
 
 help: ## Show this list
-	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | \
+	@grep -hE '^[a-z-]+:.*## ' Makefile | \
 		awk -F':.*## ' '{printf "  make %-16s %s\n", $$1, $$2}'
 	@echo
 	@echo "  Variables: DIR=<project folder>  MODEL=glm-5.3|deepseek-v4.1-flash  PROMPT=\"...\""
