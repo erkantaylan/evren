@@ -37,8 +37,10 @@ Without `DIR` the tool opens on this folder.
 
 ## Setup on this machine
 
-- **API key**: `EVREN_API_KEY` is exported from `~/.zshenv`. Keys are created
-  at <https://evren.ssyz.org.tr/api-keys>. The key is not stored in this folder.
+- **API key**: read from `.env` in this folder. Copy `.env.example` to `.env`
+  and put the key in it, without quotes. `.env` is git-ignored. Keys are
+  created at <https://evren.ssyz.org.tr/api-keys>. If `.env` is missing, the
+  Makefile falls back to `EVREN_API_KEY` from the shell environment.
 - **opencode**: provider `evren` in `~/.config/opencode/opencode.json`
   (models `glm-5.3`, `deepseek-v4.1-flash`, `qwen3.8-flash-next`).
 - **Junie**: profiles `~/.junie/models/evren-glm.json` and

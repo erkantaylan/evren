@@ -6,6 +6,11 @@
 
 SHELL := /bin/bash
 
+# Settings come from .env in this folder (see .env.example). Values there
+# override the shell environment. Write them without quotes.
+-include .env
+export EVREN_API_KEY
+
 API   := https://evren-llmapi.ssyz.org.tr
 DIR   ?= $(CURDIR)
 # The shell does not expand "~" in DIR=~/x, so do it here.
@@ -37,7 +42,7 @@ help: ## Show this list
 	@echo "  Variables: DIR=<project folder>  MODEL=glm-5.3|deepseek-v4.1-flash  PROMPT=\"...\""
 
 check-key:
-	@[ -n "$$EVREN_API_KEY" ] || { echo "EVREN_API_KEY is not set (add it to ~/.zshenv)"; exit 1; }
+	@[ -n "$$EVREN_API_KEY" ] || { echo "EVREN_API_KEY is not set: copy .env.example to .env and fill it in"; exit 1; }
 
 # --- coding tools ----------------------------------------------------------
 
