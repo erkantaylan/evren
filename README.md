@@ -51,8 +51,8 @@ tool exits.
 
 ## Setup on this machine
 
-- **API key**: read from `.env` in this folder. Copy `.env.example` to `.env`
-  and put the key in it, without quotes. `.env` is git-ignored. Keys are
+- **API key**: read from `.env` in this folder. Run `make env` to create it
+  from `.env.example`, then put the key in it, without quotes. `.env` is git-ignored. Keys are
   created at <https://evren.ssyz.org.tr/api-keys>. If `.env` is missing, the
   Makefile falls back to `EVREN_API_KEY` from the shell environment.
 - **opencode**: provider `evren` in `~/.config/opencode/opencode.json`

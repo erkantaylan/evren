@@ -42,7 +42,7 @@ CURL := curl -sS -m 30 -H "X-API-Key: $$EVREN_API_KEY"
 JSON := python3 -m json.tool --no-ensure-ascii
 
 .DEFAULT_GOAL := help
-.PHONY: help check-key junie junie-deepseek opencode opencode-ask claude tmux \
+.PHONY: help env check-key junie junie-deepseek opencode opencode-ask claude tmux \
         quota models terms test
 
 help: ## Show this list
@@ -51,8 +51,12 @@ help: ## Show this list
 	@echo
 	@echo "  Variables: DIR=<project folder>  MODEL=glm-5.3|deepseek-v4.1-flash  PROMPT=\"...\"  TOOL=claude|junie|opencode"
 
+env: ## Create .env from .env.example (keeps an existing .env)
+	@if [ -e .env ]; then echo ".env already exists, left as is"; \
+	else ( umask 077; cp .env.example .env ) && echo "Created .env: put your key in it"; fi
+
 check-key:
-	@[ -n "$$EVREN_API_KEY" ] || { echo "EVREN_API_KEY is not set: copy .env.example to .env and fill it in"; exit 1; }
+	@[ -n "$$EVREN_API_KEY" ] || { echo "EVREN_API_KEY is not set: run \"make env\" and put your key in .env"; exit 1; }
 
 # --- coding tools ----------------------------------------------------------
 
