@@ -26,14 +26,28 @@ Without `DIR` the tool opens on this folder.
 | `make junie-deepseek` | Junie with `deepseek-v4.1-flash` |
 | `make opencode` | opencode TUI; choose an `evren/...` model with `/models` |
 | `make opencode-ask PROMPT="..."` | One-shot opencode run, prints the answer |
-| `make claude` | Claude Code talking to EVREN instead of Anthropic |
+| `make claude` | Claude Code talking to EVREN instead of Anthropic, with `deepseek-v4.1-flash` |
+| `make tmux TOOL=claude` | Start a tool in a detached tmux session and print the attach command |
 | `make quota` | Remaining daily tokens and limits |
 | `make models` | Model ids the key can use |
 | `make terms` | Terms-of-service acceptance status |
 | `make test` | One tiny request through the raw API |
 
-`MODEL=deepseek-v4.1-flash` switches the model for `junie`, `opencode-ask`,
-`claude` and `test`. The default is `glm-5.3`.
+`MODEL=...` picks the model for `junie`, `opencode-ask`, `claude`, `tmux` and
+`test`. Without it, Claude Code uses `deepseek-v4.1-flash` (faster and with a
+much larger fleet, which suits an agent loop) and everything else uses
+`glm-5.3` (the gateway's most capable model, but slower and more congested).
+
+### tmux
+
+```bash
+make tmux TOOL=claude MODEL=glm-5.3 DIR=~/code/my-project
+tmux attach -t '=evren-claude'
+```
+
+`TOOL` is `claude` (default), `junie` or `opencode`. The session is named
+`evren-<tool>`; set `SESSION=...` to run several at once. It closes when the
+tool exits.
 
 ## Setup on this machine
 
